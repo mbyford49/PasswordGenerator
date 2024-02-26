@@ -16,6 +16,54 @@ var specialcharacters = [
   "[","{","]","}",";",":","'",",","<",".",">","/","?","|",
 ];
 
+function getPasswordOptions() {
+  var length = parseInt(
+    prompt("How many characters will your password contain")
+  );
+
+  if (length < 8) {
+    alert("Password must contain at least 8 characters");
+    return prompt;
+  }
+
+  if (length > 128) {
+    alert("Password must contain no more than 128 characters");
+    return prompt;
+  }
+
+  var hasuppercaseletters = confirm("Click OK to include uppercase letters");
+
+  var haslowercaseletters = confirm("Click OK to include lowercase letters");
+
+  var hasnumbers = confirm("Click OK to include numbers");
+
+  var hasspecialcharacters = confirm("Click OK to include special characters");
+
+  if (
+    hasuppercaseletters === false &&
+    haslowercaseletters === false &&
+    hasnumbers === false &&
+    hasspecialcharacters === false
+  ) {
+    alert("Password must contain at least one character type");
+    return prompt;
+  }
+
+  var passwordOptions = {
+    length: length,
+    hasuppercaseletters: hasuppercaseletters,
+    haslowercaseletters: haslowercaseletters,
+    hasnumbers: hasnumbers,
+    hasspecialcharacters: hasspecialcharacters,
+  };
+
+  return passwordOptions;
+}
+
+function generatePassword() {
+  var options = getPasswordOptions();
+}
+
 
 
 // Get references to the #generate element

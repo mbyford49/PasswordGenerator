@@ -23,6 +23,7 @@ function getPasswordOptions() {
 
   if (length < 8) {
     alert("Password must contain at least 8 characters");
+
     return prompt;
   }
 
@@ -60,8 +61,51 @@ function getPasswordOptions() {
   return passwordOptions;
 }
 
+function getRandom(array) {
+  var randIndex = Math.floor(Math.random() * array.length);
+  var randElement = array[randIndex];
+  return randElement;
+}
+
 function generatePassword() {
   var options = getPasswordOptions();
+
+  var result = [];
+
+  var possibleCharacters = [];
+
+  var guaranteedCharacters = [];
+
+  if (options.hasuppercaseletters) {
+    possibleCharacters = possibleCharacters.concat(uppercaseletters);
+    guaranteedCharacters.push(getRandom(uppercaseletters));
+  }
+
+  if (options.haslowercaseletters) {
+    possibleCharacters = possibleCharacters.concat(lowercaseletters);
+    guaranteedCharacters.push(getRandom(lowercaseletters));
+  }
+
+  if (options.hasnumbers) {
+    possibleCharacters = possibleCharacters.concat(numbers);
+    guaranteedCharacters.push(getRandom(numbers));
+  }
+
+  if (options.hasspecialcharacters) {
+    possibleCharacters = possibleCharacters.concat(specialcharacters);
+    guaranteedCharacters.push(getRandom(specialcharacters));
+  }
+
+  for (var i = 0; i < options.length; i++) {
+    var possibleCharacter = getRandom(possibleCharacters);
+    result.push(possibleCharacter);
+  }
+
+  for (var i = 0; i < guaranteedCharacters.length; i++) {
+    result[i] = guaranteedCharacters[i];
+  }
+
+  return result.join("");
 }
 
 
